@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h3 class="modal-title">查看发送短信情况</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation" novalidate>
+        <!-- alert -->
+        <div>
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        </div>
+        <!-- / alert -->
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">sim卡号:</label>
+            <div class="col-sm-9">
+
+                <label class="col-sm-12 control-label text-left">{{msg.terminalId}}</label>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">发送短信数:</label>
+            <div class="col-sm-9">
+
+                <label class="col-sm-12 control-label text-left">{{msg.send}}</label>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">接受短信数:</label>
+            <div class="col-sm-9">
+
+                <label class="col-sm-12 control-label text-left">{{msg.recieve}}</label>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">所属机构:</label>
+            <div class="col-sm-9">
+                <label class="col-sm-12 control-label text-left">{{msg.providerName}}</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">最后发送/接收短信时间:</label>
+            <div class="col-sm-9">
+                <label class="col-sm-12 control-label text-left">{{msg.lastTime}}</label>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<div class="modal-footer ng-scope">
+    <button class="btn btn-default" ng-click="close()">关闭</button>
+</div>

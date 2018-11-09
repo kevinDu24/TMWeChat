@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3 class="modal-title">提示</h3>
+</div>
+<form class="form-horizontal form-validation" method="get" name="form" novalidate>
+    <div class="modal-body" cg-busy="{promise:myPromise, message:'正在加载,请稍后...', backdrop:false}">
+        更换设备原因:<textarea class="form-control" ng-model="reason" required></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-click="complete(1)">取消</button>
+        <button type="submit" class="btn btn-success" ng-click="complete(2)" ng-disabled='form.$invalid'>确定</button>
+    </div>
+</form>

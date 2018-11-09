@@ -1,0 +1,15 @@
+<div class="modal-header" style="z-index:9999;">
+    <button type="button" class="close" ng-click="search()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">合同查询</h3>
+</div>
+<form class="form-horizontal form-validation" method="get" name="form">
+    <div class="modal-body">
+        <div class="input-group">
+          <input type="text" class="form-control rounded" placeholder="请输入申请号、姓名" ng-model="condition">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="search()" ng-disabled="loading"> <i class="fa fa-search "></i></button>
+              </span>
+        </div>
+      </div>
+    </div>
+</form>

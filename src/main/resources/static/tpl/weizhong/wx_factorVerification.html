@@ -1,0 +1,38 @@
+<div class="wrapper-xs" ng-controller="wxFactorVerificationController">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">基本信息填写:</div>
+        <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+            <form name="form" class="form-validation" novalidate>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>姓名：</label>
+                    <input type="text" class="form-control"  ng-model="user.name"  readonly="readonly" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>身份证号：</label>
+                    <input type="text" class="form-control"  ng-model="user.idCardNum" readonly="readonly"  required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>银行预留手机号：</label>
+                    <input type="text" class="form-control" placeholder="请输入银行预留手机号" ng-model="user.phoneNum"  ng-pattern="/(^\d{11}$)/" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>银行开户行：</label>
+                    <select name="account" class="form-control" ng-model="bank"  ng-options="bank.BAHKYH for bank in banks">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>银行卡号：</label>
+                    <input type="text" class="form-control" type="text" placeholder="请输入银行卡号" ng-model="user.bankCardNum" ng-pattern="/(^\d{16,19}$)/" required>
+                </div>
+                <!--<div class="form-group" style="padding-left: 0px;">-->
+                    <!--<label><span class="text-danger">*</span>银行卡照片：</label>-->
+                    <!--<input class="form-control m-b-sm" type="file" file-model="file">-->
+                    <!--<button class="btn btn-default" ng-click="upload()">上传</button>-->
+                    <!--<a class="a01" target="_blank" href="{{url}}">{{url}}</a>-->
+                <!--</div>-->
+                <button type="submit" class="btn btn-primary w-full" ng-click="submit()" ng-disabled='form.$invalid || state.notShow'>提交</button>
+            </form>
+        </div>
+    </div>
+</div>

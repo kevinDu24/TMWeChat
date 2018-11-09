@@ -1,0 +1,17 @@
+<div class="wrapper-xs">
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold" align = "center">短信验证码</div>
+    <div class="panel-body" style="padding-bottom: 5px;padding-top: 0px;">
+      <div class="modal-footer" style="padding-bottom: 0px;padding-top: 0px;padding-right: 0px;padding-left: 0px;">
+        <!--<input type="text" placeholder="请获取验证码" class="form-control" ng-model="code" ng-pattern="/^[0-9]{6}$/" required>-->
+        <form name="form" class="form-validation" novalidate>
+          <div class="form-group" style="padding-top: 15px;">
+            <input type="text" class="form-control" placeholder="请输入短信验证码" ng-model="code"  ng-pattern="/^[0-9]{6}$/" required>
+          </div>
+        </form>
+        <button class="btn btn-primary" ng-click="close()">取消</button>
+        <button class="btn btn-primary" ng-click="choose(code)"  ng-disabled='form.$invalid'>确认</button>
+      </div>
+    </div>
+  </div>
+</div>

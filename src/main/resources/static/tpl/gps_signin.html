@@ -1,0 +1,33 @@
+<div class="container w-xxl w-auto-xs" ng-controller="GpsSigninFormController" ng-init="app.settings.container = false;">
+  <a class="navbar-brand block m-t-xxxl m-b-md">
+    <span class="hidden-folded m-l-xs">GPS安装激活</span>
+  </a>
+  <div class="m-b-lg">
+    <div class="text-center m-b-md">
+      <strong>请填写备案手机号和验证码进行登录</strong>
+    </div>
+    <form name="form" class="form-validation" novalidate>
+      <div class="text-danger wrapper text-center" ng-show="authError">
+          {{authError}}
+      </div>
+      <div class="list-group list-group-sm">
+        <div class="list-group-item">
+          <div class="input-group">
+            <span class="input-group-addon no-bg"><i class="icon-user"></i></span>
+            <input type="number" class="form-control input-lg" placeholder="请输入备案手机号" ng-model="phoneNum" required>
+          </div>
+        </div>
+        <div class="list-group-item">
+           <div class="input-group">
+             <span class="input-group-addon no-bg"><i class="icon icon-screen-smartphone"></i></span>
+             <input type="number" placeholder="请输入验证码" class="form-control input-lg" ng-model="code" required>
+             <span class="input-group-addon no-bg"  role="button" tabindex="0"><button class="btn btn-info btn-sm" ng-click="getSmsCode()">获取短信验证码</button></span>
+           </div>
+          <p class="help-block m-b" ng-show="showMsg">验证码将以短信方式发送至您的手机</p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-lg btn-primary btn-block m-b-sm" ng-click="login()">验证登录</button>
+      <p class="text-info text-center">请打开微信的GPS定位功能，否则无法激活设备，请查看<a ui-sref="gps.tutorial">《手机定位开启教程》</a></p>
+    </form>
+  </div>
+</div>

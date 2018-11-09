@@ -1,0 +1,68 @@
+<div class="wrapper-xs" ng-controller="gpsActivateController" cg-busy="{promise:myPromise, message:'正在加载,请稍后...', backdrop:false}">
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold">设备安装信息</div>
+    <div class="panel-body">
+      <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+      <form name="form" class="form-validation" novalidate>
+        <div class="form-group">
+          <label>设备类型：</label><label style="color: red">(请选择正确的设备类型)</label>
+          <select name="account" class="form-control" ng-model="gps" ng-options="gps.name for gps in gpsTypes">
+          </select>
+        </div>
+        <div class="form-group">
+          <label>车架号后6位：</label>
+          <input type="number" name="deviceVin" class="form-control" placeholder="请输入车架号后6位" ng-model="device.vin" ng-pattern="/[0-9]/" ng-maxlength="6" ng-minlength="6" required>
+          <span style="color: red" ng-show="form.deviceVin.$invalid">
+              <span ng-show="form.deviceVin.$error.minlength">*请正确输入车架号后6位数字</span>
+            <span ng-show="form.deviceVin.$error.maxlength">*请正确输入车架号后6位数字</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>车主姓名：</label>
+          <input type="text" name="carOwnerName" class="form-control" placeholder="请输入车主姓名" ng-model="device.carOwnerName" ng-minlength="1" required>
+          <span style="color: red" ng-show="form.carOwnerName.$invalid">
+              <span ng-show="form.carOwnerName.$error.minlength">*请输入车主姓名</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>SIM卡号：</label>
+          <input type="number" name="simCardNum" class="form-control" placeholder="请输入13位SIM卡号" ng-model="device.simCardNum" ng-pattern="/[0-9]/" ng-maxlength="13" ng-minlength="13" required>
+          <span style="color: red" ng-show="form.simCardNum.$invalid">
+              <span ng-show="form.simCardNum.$error.minlength">*请输入13位SIM卡号</span>
+            <span ng-show="form.simCardNum.$error.maxlength">*请输入13位SIM卡号</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>GPS定位信息：</label>
+          <!--<p class="text-md">合肥市蜀山区新华广场B栋</p>-->
+          <select name="account" class="form-control" ng-model="position" ng-options="position.title for position in positions">
+          </select>
+        </div>
+        示例图片:
+        <img src="http://wx.xftm.com:89/device/安装示例图-车正面.jpg" width="30" height="30" ng-click="showExampleImg()"/>&nbsp;
+        <img src="http://wx.xftm.com:89/device/安装示例图-车架号.jpg" width="30" height="30" ng-click="showExampleImg()"/>&nbsp;
+        <img src="http://wx.xftm.com:89/device/安装示例图-设备安装位置图.jpg" width="30" height="30" ng-click="showExampleImg()"/><br>
+        说明:请根据示例图的要求拍摄3张照片
+        <br><br>
+        <button ng-click="getPhoto()">拍照</button>
+        <br>
+        <div ng-repeat="image in images" class="m-b-xs">
+          <img src="{{image}}" width="100" height="100" />
+          <button ng-click="deletePhoto($index)">删除</button>
+
+        </div>
+        <!--<div class="form-group">-->
+          <!--<label>上传图片：</label>-->
+          <!--<p class="text-info">1、请拍摄安装设备与车架号的合照</p>-->
+          <!--<input type="file" class="form-control m-b" >-->
+          <!--<p class="text-info">2、请拍摄设备安装后的位置照</p>-->
+          <!--<input type="file" class="form-control m-b" >-->
+          <!--<p class="text-info">3、请拍摄安装车辆的正面照</p>-->
+          <!--<input type="file" class="form-control m-b" >-->
+        <!--</div>-->
+        <br>
+        <button class="btn btn-primary w-full" ng-click="submit()" ng-disabled="form.$invalid || loading">提交待激活</button>
+      </form>
+    </div>
+  </div>
+</div>

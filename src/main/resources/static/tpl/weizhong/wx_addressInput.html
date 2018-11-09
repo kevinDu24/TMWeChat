@@ -1,0 +1,33 @@
+<div class="wrapper-xs" ng-controller="wxAddressInputController">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">还款卡收货地址填写:</div>
+        <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+            <form name="form" class="form-validation" novalidate>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>姓名：</label>
+                    <input type="text" class="form-control"  ng-model="user.name"  readonly="readonly" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>收件人手机号：</label>
+                    <input type="text" class="form-control" placeholder="请输入收件人手机号" ng-model="user.phoneNum"  ng-pattern="/(^\d{11}$)/" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>收件省份：</label>
+                    <select name="account" class="form-control" ng-model="province" ng-change="optionChange()" ng-options="province.name for province in provinces">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>收件城市：</label>
+                    <select name="account" class="form-control" ng-model="city" ng-options="city.name for city in cities">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>收货地址：</label>
+                    <input type="text" class="form-control" placeholder="请输入放款卡收件地址"  ng-model="user.address" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full" ng-click="submit()" ng-disabled='form.$invalid || state.notShow'>提交</button>
+            </form>
+        </div>
+    </div>
+</div>

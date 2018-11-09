@@ -1,0 +1,55 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="msgListController">
+    <div class="m-b-md">
+        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    </div>
+    <div class="wrapper-sm">
+        <!--<div class="col-md-1 col-lg-2"></div>-->
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="text-md pull-left">{{message.terminalId}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<timer interval="1000" countdown="31" autostart="false" ng-show="refreshState">短信发送成功,短信列表<span class="text-danger">{{countdown}}</span>秒后刷新列表,请勿重新发送 </timer></div>
+                            <button class="btn btn-default btn-sm pull-right" ng-click="refreshData()"><i class="fa fa-refresh"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="m-b-md">
+                        <form >
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="message.msgContent" placeholder="短信内容">
+                                <span class="input-group-btn">
+                                  <button  type="submit" class="btn btn-default" type="button" ng-click="sendMsg()">发送短信</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="m-b" ng-repeat="msg in msgs">
+                        <button class="{{msg.type == 0 ? 'pull-right thumb-sm avatar btn btn-rounded btn-icon btn-lg btn-success text-lg ' : 'pull-left thumb-sm avatar btn btn-rounded btn-icon btn-lg btn-info text-lg '}}">{{msg.type == 0 ? '发' : '接'}}</button>
+                        <div class="{{msg.type == 0 ? 'm-r-xxl': 'm-l-xxl'}}">
+                            <div class="{{msg.type == 0 ? 'pos-rlt wrapper bg-success r r-2x': 'pos-rlt wrapper bg-info r r-2x'}}">
+                                <span class="{{msg.type == 0 ? 'arrow right pull-up arrow-success': 'arrow left pull-up arrow-info'}}"></span>
+                                <p class="m-b-none"><pre style="background-color: inherit;border: 0">{{msg.msgContent}}</pre></p>
+                            </div>
+                            <small class="text-muted"><i class="fa fa-ok text-success"></i> {{msg.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--<div class="col-md-1 col-lg-1"></div>-->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

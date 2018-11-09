@@ -1,0 +1,110 @@
+<div class="wrapper-xs" ng-controller="usedCarAnalysisController">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">车辆信息填写:</div>
+        <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+            <form name="form" class="form-validation" novalidate>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>车架号：</label>
+                    <input type="text" class="form-control" placeholder="请输入车架号" ng-model="user.vin"   ng-mouseleave = "identifyModelByVIN()" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>车辆型号：</label>
+                    <input type="text" class="form-control" placeholder="请填写车架号获取车辆型号" ng-model="user.modelName" required readonly>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>所在省份：</label>
+                    <select name="account" class="form-control" ng-model="zone"  ng-options="zone.group for zone in zones" ng-change="optionChange(zone)"></select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>所在城市：</label>
+                    <select name="account" class="form-control" ng-model="city"  ng-options="city.city_name for city in cityList"></select>
+                </div>
+                <div class="form-group" style="margin-bottom: 0">
+                    <label><span class="text-danger">*</span>上牌日期：</label>
+                    <input type="date" class="form-control"  placeholder="上牌日期" ng-model="user.regDate" >
+                </div>
+                <div class="form-group" style="margin-bottom: 0">
+                    <label><span class="text-danger">*</span>出厂日期：</label>
+                    <input type="date" class="form-control"  placeholder="出厂日期" ng-model="user.makeDate" >
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>行驶里程(万公里)：</label>
+                    <input type="number" class="form-control" placeholder="请输入行驶里程（万公里）" ng-model="user.mile"  ng-maxLength="8" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>车身颜色：</label>
+                    <select ng-model="user.color">
+                        <option value ="米色">米色</option>
+                        <option value ="棕色">棕色</option>
+                        <option value="金色">金色</option>
+                        <option value="紫色">紫色</option>
+                        <option value="巧克力色">巧克力色</option>
+                        <option value="黑色">黑色</option>
+                        <option value ="灰色">灰色</option>
+                        <option value ="绿色">绿色</option>
+                        <option value="橙色">橙色</option>
+                        <option value="白色">白色</option>
+                        <option value="香槟色">香槟色</option>
+                        <option value="银色">银色</option>
+                        <option value="黄色">黄色</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>过户次数：</label>
+                    <select ng-model="user.transferTimes">
+                        <option value ="1">1次</option>
+                        <option value ="2">2次</option>
+                        <option value="3">3次</option>
+                        <option value="4">4次</option>
+                        <option value="5">5次</option>
+                        <option value="6">6次</option>
+                        <option value ="7">7次</option>
+                        <option value="8">8次</option>
+                        <option value="9">9次</option>
+                        <option value="10">10次</option>
+                        <option value="11">>10次 </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>工况状况：</label>
+                    <select ng-model="user.workState">
+                        <option value ="优">优</option>
+                        <option value ="良">良</option>
+                        <option value="中">中</option>
+                        <option value="差">差</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>车辆内饰：</label>
+                    <select ng-model="user.interior">
+                        <option value ="优">优</option>
+                        <option value ="良">良</option>
+                        <option value="中">中</option>
+                        <option value="差">差</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>外观状况：</label>
+                    <select ng-model="user.surface">
+                        <option value ="优">优</option>
+                        <option value ="良">良</option>
+                        <option value="中">中</option>
+                        <option value="差">差</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>手机号：</label>
+                    <input type="text" class="form-control" placeholder="请输入您的手机号" ng-model="user.operatorPhoneNum"  ng-pattern="/(^\d{11}$)/" required>
+                </div>
+                <label><span class="text-danger">*</span>验证码：</label>
+                <div class="input-group">
+                    <input type="text" placeholder="请获取验证码" class="form-control" ng-model="user.messageCode" ng-pattern="/^[0-9]{6}$/" required>
+                    <span class="input-group-addon no-bg no-border " style="padding: 0" role="button" ><button class="btn btn-info btn-sm" ng-click="getSmsCode()"><timer interval="1000" countdown="60" autostart="false" ng-show="startCountdown">{{countdown}}</timer>{{showMsg}}</button> </span>
+                </div>
+                <p class="help-block m-b">验证码将以短信方式发送至您的手机</p>
+                <button type="submit" class="btn btn-primary w-full" ng-click="submit()" ng-disabled='form.$invalid || user.notShow'>提交</button>
+            </form>
+        </div>
+    </div>
+</div>

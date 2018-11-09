@@ -1,0 +1,55 @@
+<div ng-controller="contractDetailsController">
+  <div class="bg-light lter b-b wrapper-xs">
+    <div class="row">
+      <div class="col-xs-2">
+        <a class="btn" ui-sref="app.hpl.applyDetails"  ><i class="fa fa-chevron-left" style="font-size:22px;"></i></a>
+      </div>
+      <div class="col-xs-10 ">
+          <h5 class="text-md">产品详情</h5>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-xs">
+    <table class="table table-striped bg-white m-b-none">
+      <tbody>
+      <tr>
+        <td>车辆类型</td>
+        <td class="text-right">{{contractDetails.BACLLX}}</td>
+      </tr>
+      <tr>
+        <td>品牌</td>
+        <td class="text-right">{{contractDetails.BACLPP}}</td>
+      </tr>
+      <tr>
+        <td>车型</td>
+        <td class="text-right">{{contractDetails.BACLCX}}</td>
+      </tr>
+      <tr>
+        <td>售价</td>
+        <td class="text-right">{{contractDetails.BAXSJG}}</td>
+      </tr>
+      <tr>
+        <td>融资金额</td>
+        <td class="text-right">{{contractDetails.BATZZE - contractDetails.BASFJE}}</td>
+      </tr>
+      <tr>
+        <td>投资金额（含GPS）</td>
+        <td class="text-right">{{contractDetails.BATZZE}}</td>
+      </tr>
+      <tr>
+        <td>首付金额</td>
+        <td class="text-right">{{contractDetails.BASFJE}}</td>
+      </tr>
+      <tr>
+        <td>融资期限</td>
+        <td class="text-right">{{contractDetails.BARZQX}}</td>
+      </tr>
+      <tr>
+        <td>月供</td>
+        <td class="text-right">{{contractDetails.BAYZYG}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

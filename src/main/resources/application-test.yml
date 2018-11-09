@@ -1,0 +1,44 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+server:
+  port: 8081
+spring:
+  redis:
+    host: 116.236.234.246
+    port: 16379
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://116.236.234.246:15432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+#spring:
+#  jpa:
+#    database: oracle
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#    platform: oracle
+#    url: jdbc:oracle:thin:@localhost:1521:XE
+#    username: system
+#    password: oracle
+#    driver-class-name: oracle.jdbc.OracleDriver
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+multipart:
+  max-file-size: 10Mb
+  max-request-size: 10Mb
+file:
+  filePath: /Library/WebServer/Documents/news/
+  requestFrontPath: http://localhost/news/

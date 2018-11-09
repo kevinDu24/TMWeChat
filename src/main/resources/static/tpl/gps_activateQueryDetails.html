@@ -1,0 +1,106 @@
+<div ng-controller="gpsActivateQueryDetailsController" cg-busy="{promise:myPromise, message:'正在加载,请稍后...', backdrop:false}">
+  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+  <div class="bg-light lter b-b wrapper-sm">
+      <div class="input-group">
+        <input type="number" class="form-control rounded" placeholder="请输入sim卡号进行查询" ng-model="simCard">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="getData(simCard, 1)"> <i class="fa fa-search "></i></button>
+          <button class="btn btn-default" type="button" ng-click="refresh()"> <i class="fa fa-refresh "></i></button>
+        </span>
+      </div>
+  </div>
+  <ul class="list-group no-borders">
+    <li class="list-group-item" style="padding:2px">
+      安装时间:{{data.installedTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+    </li>
+    <li class="list-group-item" style="padding:2px">
+      客户姓名:{{data.applyOrder.customerName}}
+    </li>
+    <li class="list-group-item" style="padding:2px">
+      车架号:{{data.applyOrder.vin}}
+    </li></ul>
+  <div class="wrapper-sm" ng-repeat="data in datas">
+    <div class="panel b-a m-b-none">
+      <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none" ng-if="data.status == '2'">
+        <li>线下安装</li><i class="fa fa-angle-double-right"></i>
+        <li class="text-danger">待系统激活</li><i class="fa fa-angle-double-right"></i>
+        <li>激活成功</li><i class="fa fa-angle-double-right"></i>
+        <li>任务完成</li>
+      </ul>
+
+      <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none" ng-if="data.status == '5'">
+        <li>线下安装</li><i class="fa fa-angle-double-right"></i>
+        <li class="text-danger">待系统激活:激活失败</li><i class="fa fa-angle-double-right"></i>
+        <li>激活成功</li><i class="fa fa-angle-double-right"></i>
+        <li>任务完成</li>
+      </ul>
+
+      <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none" ng-if="data.status == '3'">
+        <li>线下安装</li><i class="fa fa-angle-double-right"></i>
+        <li class="text-danger">待系统激活:任务挂起</li><i class="fa fa-angle-double-right"></i>
+        <li>激活成功</li><i class="fa fa-angle-double-right"></i>
+        <li>任务完成</li>
+      </ul>
+
+      <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none" ng-if="data.status == '4'">
+        <li>线下安装</li><i class="fa fa-angle-double-right"></i>
+        <li>待系统激活</li><i class="fa fa-angle-double-right"></i>
+        <li class="text-danger">激活成功</li><i class="fa fa-angle-double-right"></i>
+        <li>任务完成</li>
+      </ul>
+
+      <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none" ng-if="data.status == '6'">
+        <li>线下安装</li><i class="fa fa-angle-double-right"></i>
+        <li>待系统激活</li><i class="fa fa-angle-double-right"></i>
+        <li>激活成功</li><i class="fa fa-angle-double-right"></i>
+        <li class="text-success font-bold">任务完成<span class="badge bg-success">已完成</span></li>
+      </ul>
+      <ul class="list-group no-borders">
+        <li class="list-group-item " style="padding:2px">
+          安装时间:{{data.installedTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+        </li>
+        <li class="list-group-item" style="padding:2px">
+          客户姓名:{{data.applyOrder.customerName}}
+        </li>
+        <li class="list-group-item" style="padding:2px">
+          车架号:{{data.applyOrder.vin}}
+        </li>
+        <li class="list-group-item" style="padding:2px">
+          订单编号:{{data.applyNum}}
+        </li>
+        <li class="list-group-item" style="padding:2px">
+          SIM卡号:{{data.simCardNum}}
+        </li>
+        <li class="list-group-item" style="padding:2px">
+          安装地点:{{data.installedaddr}}
+        </li>
+        <div class="w-full text-center m-b-md">
+          <img src="img/loading.gif" width="50" height="50" style="width:24px;height:24px;margin:0 auto;"  ng-show="data.status == '2'"/>
+        </div>
+
+        <div class="list-group-item" ng-show="data.status == '5'" style="padding:2px">
+          激活失败原因:设备没有通电或当前位置没有信号，请排查。
+          <button class="btn btn-default" ng-click="reactivate($index)">重新激活</button><button class="btn btn-default" ng-click="changeDevice(2, $index)">更换设备</button></div>
+        </div>
+        <div class="list-group-item" ng-show="data.status == '3'" style="padding:2px">
+          挂起原因:系统故障
+          <button class="btn btn-default" ng-click="refreshState($index)">刷新状态</button>
+        </div>
+        <li class="list-group-item" ng-show="data.status == '4'" style="padding:2px">
+          <ul class="list-group no-borders">
+            <li class="list-group-item " style="padding: 2px">
+              激活时间:{{data.locationTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+            </li>
+            <li class="list-group-item " style="padding: 2px">
+              激活地点:{{data.successAddr}}
+            </li>
+            <li class="list-group-item " style="padding: 2px">
+              车辆状态:{{data.state}}
+            </li>
+          </ul>
+          <div><button ng-click="complete($index)">任务完成</button></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

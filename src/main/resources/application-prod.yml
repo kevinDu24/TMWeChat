@@ -1,0 +1,160 @@
+server:
+  port: 80
+spring:
+  http:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  redis:
+    host: redis
+#    port: 6379
+#    password: 123ewQAZ
+  jpa:
+    database: POSTGRESQL
+    show-sql: true   # 打印 Hibernate sql 语句
+#    show-sql: false
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://wx.xftm.com:5432/postgres
+    username: postgres
+    password: Leadu!@#3^SH
+#    url: jdbc:postgresql://10.10.1.165:5432/postgres
+#    username: postgres
+#    password: LeaduAbc123
+    driver-class-name: org.postgresql.Driver
+#spring:
+#  jpa:
+#    database: oracle
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#    platform: oracle
+#    url: jdbc:oracle:thin:@localhost:1521:XE
+#    username: system
+#    password: oracle
+#    driver-class-name: oracle.jdbc.OracleDriver
+logging:
+  file: /var/www/html/log/wechat.log
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+  threadpool:
+    default:
+      coreSize: 200
+      maxQueueSize: 200
+      queueSizeRejectionThreshold: 50
+file:
+  filePath: /var/www/html/device/
+  newsPath: /var/www/html/news/
+  creditImgPath: /var/www/html/creditImg/
+  requestFrontPath: http://wx.xftm.com:89/device/
+  requestCreditImgPath: http://wx.xftm.com:89/creditImg/
+  feedbackSoundPath: /var/www/html/feedbackSound/
+  requestfeedbackSoundPath: http://wx.xftm.com:89/feedbackSound/
+  headImgPath: /var/www/html/headImg/
+  requestHeadImgPath: http://wx.xftm.com:89/headImg/
+  deviceImgPath: /var/www/device/
+  annexesImgPath: /var/www/html/annexesImg/
+  requestAnnexesImgPath: http://wx.xftm.com:89/annexesImg/
+  cmdImgPath: /var/www/html/cmdImg/
+  requestCmdImgPath: http://wx.xftm.com:80/files/download/
+  cmdOtherImgPath:  /var/www/html/cmdOtherImg/
+  requestCmdOtherImgPath: http://wx.xftm.com:80/files/download/
+  approvalIdCardPath: /var/www/html/approvalIdCard/
+  requestApprovalIdCardPath: http://wx.xftm.com/files/download/idCard/
+  approvalDrivePath: /var/www/html/approvalDrive/
+  requestApprovalDrivePath: http://wx.xftm.com/files/download/drivingLicence/
+  approvalBankPath: /var/www/html/approvalBank/
+  requestApprovalBankPath: http://wx.xftm.com/files/download/bankCard/
+  approvalVerdictPath: /var/www/html/approvalVerdict/
+  requestApprovalVerdictPath: http://wx.xftm.com/approvalVerdict/
+  applyUsedCarEvaluationPath: /var/www/html/usedCarEvaluation/
+  requestApplyUsedCarEvaluationPath: http://wx.xftm.com/files/download/
+  letterOfCreditPath: /var/www/html/letterOfCredit/
+  requestLetterOfCreditPath: http://wx.xftm.com/files/download/letterOfCredit/
+  handHoldLetterOfCreditPath: /var/www/html/handHoldLetterOfCredit/
+  requestHandHoldLetterOfCreditPath: http://wx.xftm.com/files/download/handHoldLetterOfCredit/
+  applyFormPath: /var/www/html/applyForm/
+  jointFilePath: /var/www/html/jointFile/
+  mateFilePath: /var/www/html/mateFile/
+  guaranteeFilePath: /var/www/html/guaranteeFile/
+  requestPaymentFilePath: /var/www/html/requestPaymentFile/
+  insurancePolicyPath: /var/www/html/insurancePolicyFile/
+  onlineCommunicationPath: /var/www/html/onlineCommunication/
+  requestFilePath: http://wx.xftm.com/files/download/
+  idCardPath: /var/www/html/idCard/
+  requestIdCardPath: http://wx.xftm.com/files/download/idCard/
+  faceImagePath: /var/www/html/faceImage/
+  requestFaceImagePath: http://wx.xftm.com/files/download/faceImage/
+  pdfPath: /var/www/html/pdf/
+  requestPdfPath: http://wx.xftm.com/files/download/pdf/
+  signedPdfPath: /var/www/html/signedPdf/
+  requestSignedPdfPath: http://wx.xftm.com/files/download/signedPdf/
+  userPhotoPath: /var/www/html/userPhoto/
+  requestUserPhotoPath: http://wx.xftm.com/files/download/userPhoto/
+
+admin:
+  auth: Basic d2VjaGF0OmxlYWR1MjAxNg==
+request:
+  coreServerUrl: http://happyleasing.cn/TMZL/app/
+  coreApplyServerUrl: http://happyleasing.cn/TMZL/
+  XftmAppAppCtrlServerUrl: http://116.228.224.59:8767/XftmApp/AppCtrl/
+  coreServerYCUrl: http://117.121.100.207:12345/YCZL/app
+  usedCarEvaluationUrl: http://112.74.65.110:8080/carWeb/external/
+  adminServerUrl: http://wx.xftm.com:8089
+  baiduUrl: http://api.map.baidu.com
+  wechatServerUrl: http://fwh.xftm.com
+approval:
+  version: 1.0
+phone:
+  apikey: d95713c236a7a9d56707f50bc113bf9c
+#  短信网关 梦网科技
+message:
+  userId: JJ2075
+  password: 127628
+  pszMsg: 验证码：xxxxxx，为保障您的账号安全，请勿泄露，有效期5分钟。
+  confirmMsg: 尊敬的***,您正申请先锋太盟融资租赁业务,请点击以下链接申请授权:http://dwz.cn
+  fourElements: 尊敬的***,您正申请先锋太盟融资租赁业务,请点击以下链接申请授权:银行卡信息认证:http://dwz.cn
+  addressInput: 尊敬的***,您正申请先锋太盟融资租赁业务,请点击以下链接申请授权:收货地址确认:http://dwz.cn
+  iMobiCount: 1
+  MsgId: 0
+faceid:
+  apiKey: FlaujBR73mcc0y0tCe7FocACriXm7Qqz
+  apiSecret: -KN_NY5owumOwpBlRpPljogZmvzvZ6yw
+
+wz:
+  appType: A
+  bankCardUsage: 4
+  networkType: 4g
+  rh:
+    name: CAR_CONTRACT_VER_RH
+    version: v3.1
+  iu:
+    name: CAR_CONTRACT_VER_IU
+    version: v3.1
+  account:
+    name: CAR_CONTRACT_WEBANKACCOUNT_VER
+    version: v4.1
+  sign:
+    name: CONTRACT_VER_FX_CREDIT
+    version: v1.2
+  dk:
+    name: CONTRACT_VER_DK
+    version: v1.0
+  sign_dk:
+    name: CONTRACT_DEDUCT_AUTH_VER
+    version: v1.0
+
+# 微信公众号配置
+wechat:
+  sign: 12940581fbbf2df3b9739fe34a3344b8
+  timestamp: 1429604397531
+  appid: wx96a4e2e1aa44d5cb
+  appsecret: ac1658cea1c3c4302aab8d47e59a91dc
+  token: tmwechat

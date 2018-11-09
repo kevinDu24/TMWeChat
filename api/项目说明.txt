@@ -1,0 +1,35 @@
+1.此项目为太盟宝APP和"HPL太盟宝"微信公众号后台
+2.项目代码地址：http://116.236.234.246:10182/leadu/TMWeChat.git            分支：Yachi
+3.服务器地址：222.73.56.22  端口: 80   域名:wx.xftm.com
+4.接口文档地址: http://116.236.234.246:10182/leadu/TMWeChat/wikis/home   该文档地址为APP调用接口文档
+下载地址：安卓：http://wx.xftm.com:89/android/TaiMengBao.apk        IOS: https://itunes.apple.com/cn/app/id1153456742?mt=8
+5.测试账号: 经销商账号:SH000  iphonex5555   总部账号: wangyuetest Leasing123
+6.文件服务器: http://222.73.56.22:89
+7.服务器log:  http://222.73.56.22:89/log/tmwechat/tmwechat_info.log
+              http://222.73.56.22:89/log/tmwechat/tmwechat_error.log
+
+
+在线助力融银行卡页面提交微众一审
+http://wx.xftm.com/#/app/wzApply?uniqueMark=9ecd8db6bcdf4db99453ea5b6716c108
+
+
+工行产品放款卡邮寄地址录入：
+http://wx.xftm.com/#/app/addressInput
+
+通用四要素验证：
+http://wx.xftm.com/#/app/allFactorVerification
+
+
+
+//H5四要素验证
+尊敬的用户,您正申请先锋太盟融资租赁业务,请点击以下链接申请授权:
+http://wx.xftm.com/#/app/factorVerification?applyNum=38459013
+
+
+微信公众平台地址：https://mp.weixin.qq.com/
+微信调试工具：http://mp.weixin.qq.com/debug/
+微信账号：lumengqian@xftmleasing.com
+密码：taimengbao01
+appId：wx96a4e2e1aa44d5cb
+appsecret: ac1658cea1c3c4302aab8d47e59a91dc
+

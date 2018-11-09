@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app" manifest="IGNORE.manifest">
+<head>
+  <meta charset="utf-8" />
+  <title>先锋太盟</title>
+  <meta name="description" content="Angularjs, Html5, Music, Landing, 4 in 1 ui kits package" />
+  <meta name="keywords" content="AngularJS, angular, bootstrap, admin, dashboard, panel, app, charts, components,flat, responsive, layout, kit, ui, route, web, app, widgets" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="baidu-site-verification" content="58AcEkTqcA" />
+
+
+  <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.min.css" type="text/css" />  <!-- 这里是被wro压缩（加快访问速度）的css -->
+  <link rel="stylesheet" href="css/angular-busy.css" type="text/css" /> <!-- angular插件:在发送网络请求期间显示加载中/忙的状态指示 -->
+  <style>
+    .modal {
+      text-align: center;
+      padding: 0!important;
+      z-index:9999;
+    }
+
+    .modal:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -4px;
+    }
+
+    .modal-dialog {
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+    }
+  </style>
+  <style type="text/css" rel="stylesheet">
+    body {
+    -webkit-overflow-scrolling: touch
+    }
+  </style>
+</head>
+<body ng-controller="AppCtrl">
+  <!-- 所有页面都在此div中 -->
+  <div class="app" id="app" ui-view></div>
+  <!-- jQuery -->
+  <script src="js/app.min.js"></script> <!-- 这里是被wro压缩（加快访问速度）的js -->
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> <!-- 微信JS-SDK，可调用微信一些操作 -->
+  <script src="js/timer.js"></script> <!-- angular-timer - 一个简单，可重复使用，可互操作的定时器指令 -->
+  <!-- Lazy loading -->
+  <script src="../libs/angular/angular-loading/angular-busy.js"></script> <!-- angular插件:在发送网络请求期间显示加载中/忙的状态指示 -->
+  <script src="libs/echarts/echarts.min.js"></script> <!-- echart图表插件核心js库 -->
+  <script src="libs/echarts/china.js"></script> <!-- echart图表插件中国地图js -->
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>   <!-- sohu的接口，获取客户端ip地址及城市 -->
+  <!-- loading gif -->
+  <div id="loadWin" style="width:100%;height:100%;filter:alpha(opacity=40);-moz-opacity:0.4;-khtml-opacity:0.4;opacity:0.4;background:#000;position:absolute;top:0;left:0;z-index:3000;line-height:700px; text-align:center;"
+       ng-show="busy"><img src="../img/loading.gif" style="width:40px;height:40px;">
+  </div>
+</body>
+</html>

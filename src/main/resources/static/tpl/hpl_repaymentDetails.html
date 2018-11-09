@@ -1,0 +1,67 @@
+<div ng-controller="repaymentDetailsController">
+  <div class="bg-light lter b-b wrapper-xs" style="position:fixed;z-index:9999">
+    <div class="row">
+      <div class="col-xs-2">
+        <a class="btn btn-link" ui-sref="app.hpl.repayment"><i class="fa fa-chevron-left" style="font-size:22px;"></i></a>
+      </div>
+
+      <div class="col-xs-10">
+        <div class="input-group">
+          <input type="text" class="form-control rounded" placeholder="请输入申请号、姓名" ng-model="condition">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="search()" ng-disabled="loading"> <i class="fa fa-search "></i></button>
+              </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-xs" ng-if="!showSearchList" style="padding-top:50px;">
+    <h3 class="font-bold text-center text-primary">{{contractInfo.BASQXM}}</h3>
+    <p class="text-center">合同号：{{contractInfo.BASQBH}}，共需还款 {{contractInfo.BASQZQ}} 期。</p>
+    <p class="text-center ">已还款 {{contractInfo.BAYHQS}} 期，<span class="text-danger">逾期 {{contractInfo.BAYQQS}} 期，{{contractInfo.BAYQTS}} 天，{{contractInfo.BAYQLX}} 元</span></p>
+    <div class="panel panel-default">
+      <table class="table table-striped m-b-none">
+        <thead>
+          <tr>
+            <th>期数</th>
+            <th>收款日</th>
+            <th>月供</th>
+            <th>扣款状态</th>
+            <th>罚息</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in contractInfo.repayplan">
+            <td>{{$index+1}}</td>
+            <td>{{item.BAHKRQ}}</td>
+            <td>{{item.BAHKYG}}元</td>
+            <td class="text-danger">{{item.BAKKZT}}</td>
+            <td>{{item.BAYQLX}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="font-bold text-center">还剩{{contractInfo.BASQZQ-contractInfo.BAYHQS}}期未还款</h4>
+    </div>
+  </div>
+
+  <div class="wrapper-sm" ng-if="showSearchList">
+    <div ng-repeat="(k,v) in applyList">
+      <h4 class="font-bold text-center">{{k}}</h4>
+      <ul class="list-group">
+        <li class="list-group-item " ng-repeat="record in v">
+          <a ng-click="goToDetail(record)">
+            <div class="row">
+              <div class="col-xs-3">{{record.BASQXM}}</div>
+              <div class="col-xs-3">{{record.BASQBH}}</div>
+              <div class="col-xs-3">{{record.BAKHJC}}</div>
+              <div ng-class="{'text-danger': record.BASQZT=='拒绝' || record.BASQZT=='取消', 'text-success': record.BASQZT=='审批通过', 'text-warning': record.BASQZT=='条件通过'}">{{record.BASQZT}}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <button class="btn btn-default btn-block" ng-click="nextPage()" ng-if="!loading && !loadComplete">加载数据<i class="fa fa-angle-double-down text-lg"></i></button>
+    <button class="btn btn-default btn-block" ng-if="loading && !loadComplete">正在加载请稍后...</button>
+    <button class="btn btn-default btn-block" ng-if="loadComplete">数据全部加载完成</button>
+  </div>
+</div>

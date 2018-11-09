@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 class="modal-title">提示</h3>
+</div>
+<form class="form-horizontal form-validation" method="get" name="form" novalidate>
+    <div class="modal-body">
+        车辆{{data.vin}}的设备{{data.simCardNum}}安装申请已提交成功
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-click="complete()" ng-disabled='form.$invalid'>再装一台</button>
+    </div>
+</form>

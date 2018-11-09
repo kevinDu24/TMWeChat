@@ -1,0 +1,18 @@
+<div class="modal-content" >
+  <div class="modal-body">
+    <div ng-repeat="area in selectors">
+      <div class="row">
+        <div class="col-xs-3">
+          <button class="btn btn-default" ng-click="close(area)">{{area.areaName}}</button>
+        </div>
+        <div class="col-xs-9">
+          <button class="btn btn-default m-r-xs m-b-xs" ng-click="close(childArea)" ng-repeat="childArea in area.childLevels">{{childArea.areaName}}</button>
+        </div>
+      </div>
+      <div class="line b-b b-light"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+     <button class="btn btn-danger" ng-click="close()">关闭</button>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="wrapper-xs" ng-controller="gpsDismantledController">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">设备拆除</div>
+        <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+            <form name="formQuery" class="form-validation" novalidate>
+                <div class="form-group">
+                    <label>安装订单号(申请编号)：</label>
+                    <input type="number" name="orderId" class="form-control" placeholder="请输入安装订单号(申请编号)" ng-model="applyNum" ng-minlength="1" required>
+                      <span style="color: red" ng-show="formQuery.orderId.$invalid">
+                          <span ng-show="formQuery.orderId.$error.minlength">*请输入安装订单号(申请编号)</span>
+                      </span>
+                </div>
+                <div class="form-group">
+                    <label>车架号后6位：</label>
+                    <input type="number" name="deviceVin" class="form-control" placeholder="请输入车架号后6位" ng-model="vin" ng-pattern="/[0-9]/" ng-maxlength="6" ng-minlength="6" required>
+                      <span style="color: red" ng-show="formQuery.deviceVin.$invalid">
+                          <span ng-show="formQuery.deviceVin.$error.minlength">*请正确输入车架号后6位数字</span>
+                        <span ng-show="formQuery.deviceVin.$error.maxlength">*请正确输入车架号后6位数字</span>
+                      </span>
+                </div>
+                <button class="btn btn-primary w-full m-b" ng-click="query()" ng-disabled="formQuery.$invalid">
+                    获取信息
+                </button>
+            </form>
+
+            <div ng-repeat="simCard in simCardList">
+                <label class="i-checks">
+                    <input type="checkbox" checklist-model="selectedSimCard" checklist-value="simCard">
+                    <i></i>
+                    sim卡号:{{simCard.simCardNum}};设备类型:{{simCard.type}}
+                </label>
+            </div>
+
+            <ul class="list-group no-borders" ng-repeat="task in taskList">
+                <li class="list-group-item" style="padding:2px">
+                    客户姓名：{{task.applyOrder.customerName}}
+                </li>
+                <li class="list-group-item" style="padding:2px">
+                    车架号：{{task.applyOrder.vin}}
+                </li>
+                <li class="list-group-item" style="padding:2px">
+                    SIM卡号：{{task.simCardNum}}
+                </li>
+                <li class="list-group-item" style="padding:2px">
+                    安装人员：{{task.installPerson.name}}
+                </li>
+                <li class="list-group-item" style="padding:2px">
+                    联系电话：{{task.installPerson.phoneNum}}
+                </li>
+                <li class="list-group-item " style="padding:2px">
+                    安装时间：{{task.installedTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+                </li>
+                <li class="list-group-item" style="padding:2px">
+                    安装师傅属性：{{task.installPerson.providerProperty}}
+                </li>
+            </ul>
+
+            <form name="form" class="form-validation" novalidate>
+                <!--<div class="form-group">-->
+                    <!--<label>拆除师傅属性：</label>-->
+                    <!--<select name="account" class="form-control" ng-model="property" ng-options="property for property in properties">-->
+                    <!--</select>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label>拆除师傅姓名：</label>-->
+                    <!--<input type="text" name="dismantlePersonName" class="form-control" placeholder="请输入姓名" ng-model="dismantle.dismantlePersonName" ng-minlength="1">-->
+                      <!--<span style="color: red" ng-show="form.dismantlePersonName.$invalid">-->
+                          <!--<span ng-show="form.dismantlePersonName.$error.minlength">*请输入拆除师傅姓名</span>-->
+                      <!--</span>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label>拆除师傅联系电话：</label>-->
+                    <!--<input type="number" name="dismantlePersonPhone" class="form-control" placeholder="请输入联系电话" ng-model="dismantle.dismantlePersonPhone" ng-pattern="/^(13|15|17|18)\d{9}$/">-->
+                      <!--<span style="color: red" ng-show="form.dismantlePersonPhone.$invalid">-->
+                          <!--<span ng-show="form.dismantlePersonPhone.$error.pattern">*请正确输入联系电话</span>-->
+                      <!--</span>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <label>拆除原因：</label>
+                    <textarea class="form-control" name="reason" ng-model="dismantle.dismantleReason" required></textarea>
+                </div>
+                <button class="btn btn-primary w-full" ng-click="submit()" ng-disabled="form.$invalid">
+                    提交待审核
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

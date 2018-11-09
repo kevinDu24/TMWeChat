@@ -1,0 +1,67 @@
+<div ng-controller="applyController">
+
+  <div class="bg-primary w-full wrapper-xs" style="position:fixed;z-index:9999">
+    <div style="width:176px;margin: 0 auto;">
+      <div class="btn-group" >
+        <a class="btn btn-default btn-rounded b-white " ng-click="gotoPage('app.hpl.apply')" >申请状态</a>
+        <a class="btn btn-primary btn-rounded b-white" ng-click="gotoPage('app.hpl.repayment')">还款计划</a>
+      </div>
+    </div>
+    <div style="width:30px;position: absolute;left:5px;top:3px;">
+      <a class="btn btn-link text-lg" ng-click="logout()"><i class="icon icon-logout"></i> </a>
+    </div>
+    <div style="width:30px;position: absolute;right:10px;top:0px;" >
+      <a class="btn btn-link text-lg" ng-click="search()" ng-disabled="loading"><i class="fa fa-search"></i> </a>
+    </div>
+  </div>
+
+  <div class="w-full bg-light lter b-b wrapper-xs" style="padding-top:50px;position: fixed;z-index:9998">
+    <table width="99%" style="margin: 0 auto">
+      <tbody>
+        <tr>
+          <td width="32%">
+            <select name="account" class="form-control" ng-model="category" ng-change="refresh()" ng-options="category.showName for category in categories" ng-disabled="loading">
+              <option>请选择</option>
+            </select>
+          </td>
+          <td width="34%">
+            <form class="" role="form">
+              <div class="form-group" style="margin-bottom: 0">
+                <input type="date" class="form-control "  placeholder="起始时间" ng-model="startDate" ng-change="refresh()" ng-disabled="loading">
+              </div>
+            </form>
+          </td>
+          <td width="34%">
+            <form class="" role="form">
+              <div class="form-group" style="margin-bottom: 0">
+                <input type="date" class="form-control "  placeholder="结束时间" ng-model="endDate" ng-change="refresh()" ng-disabled="loading">
+              </div>
+             </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--<div class="wrapper-sm" tagged-infinite-scroll="nextPage()" tagged-infinite-scroll-disabled="!canScroll" tagged-infinite-scroll-distance="100000">-->
+  <!--<div class="wrapper-sm" infinite-scroll='nextPage()' infinite-scroll-disabled='!canScroll' infinite-scroll-distance='500'>-->
+  <div class="wrapper-xs" style="padding-top: 90px;">
+    <div ng-repeat="(k,v) in applyList">
+      <h4 class="font-bold text-center">{{k}}</h4>
+      <ul class="list-group">
+        <li class="list-group-item " ng-repeat="record in v">
+          <a ng-click="goToDetail(record)">
+            <div class="row">
+              <div class="col-xs-3">{{record.BASQXM}}</div>
+              <div class="col-xs-3">{{record.BASQBH}}</div>
+              <div class="col-xs-3">{{record.BAKHJC}}</div>
+              <div ng-class="{'text-danger': record.BASQZT=='拒绝' || record.BASQZT=='取消', 'text-success': record.BASQZT=='审批通过', 'text-warning': record.BASQZT=='条件通过'}">{{record.BASQZT}}</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <button class="btn btn-default btn-block" ng-click="nextPage()" ng-if="canScroll && !loadComplete">加载数据<i class="fa fa-angle-double-down text-lg"></i></button>
+    <button class="btn btn-default btn-block" ng-if="!canScroll && !loadComplete">正在加载请稍后...</button>
+    <button class="btn btn-default btn-block" ng-if="loadComplete">数据全部加载完成</button>
+  </div>
+</div>

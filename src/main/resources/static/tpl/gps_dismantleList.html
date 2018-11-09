@@ -1,0 +1,65 @@
+<div ng-controller="gpsDismantleListController">
+    <div class="w-full bg-light lter b-b wrapper-xs b-b" >
+        <table width="99%" style="margin: 0 auto">
+            <tbody>
+            <tr>
+                <td width="32%" >
+                    <select  name="account" class="form-control" ng-model="condition.state" ng-change="refresh()" ng-options="state.name for state in condition.states">
+                    </select>
+                </td>
+                <td width="34%">
+                    <form  role="form">
+                        <div class="form-group" style="margin-bottom: 0">
+                            <input  type="date" class="form-control "  placeholder="起始时间" ng-model="condition.startDate" ng-change="refresh()">
+                        </div>
+                    </form>
+                </td>
+                <td width="34%">
+                    <form class="" role="form">
+                        <div class="form-group" style="margin-bottom: 0">
+                            <input type="date" class="form-control "  placeholder="结束时间" ng-model="condition.endDate" ng-change="refresh()">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td width="66%" colspan="2">
+                    <div class="form-group" style="margin-bottom: 0">
+                        <input type="text" class="form-control" style=" margin-top:10px;" placeholder="请输入车架号或车主姓名" ng-model="condition.keyword">
+                    </div>
+                </td>
+                <td width="34%">
+                    <div class="form-group" style="margin-bottom: 0">
+                        <button class=" w-full btn btn-default" style=" margin-top:10px;" ng-click="refresh()">查询</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="b-t" ng-repeat="task in dismantlePage.content">
+        <table class="m-t  table table-striped" >
+            <tr>
+                <td width="25%">拆除订单号</td>
+                <td class="text-success">{{task.applyTasks[0].applyNum}}</td>
+            </tr>
+            <tr>
+                <td>审批状态</td>
+                <td>{{task.dismantleStatus == '0' ? '待审核' : task.dismantleStatus == '1' ? '审核通过' : '拒绝'}}</td>
+            </tr>
+            <tr>
+                <td>客户姓名</td>
+                <td>{{task.customerName}}</td>
+            </tr>
+            <tr>
+                <td>车架号</td>
+                <td>{{task.vin}}</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <button class="m-l btn btn-default" ng-click="preview()" ng-if="showPreview">上一页</button><button ng-click="next()" class="pull-right btn btn-default m-r" ng-if="showNext">下一页</button>
+    </div>
+
+
+</div>

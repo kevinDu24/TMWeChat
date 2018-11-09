@@ -1,0 +1,725 @@
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=yes"/>
+</head>
+<style type="text/css">
+    @media only screen and (max-width: 1200px) { div{ font-size: 16px; }}
+    @media only screen and (max-width: 1100px) { div{ font-size: 15px; }}
+    @media only screen and (max-width: 1000px) { div{ font-size: 14px; }}
+    @media only screen and (max-width: 900px) { div{ font-size: 13px; }}
+    @media only screen and (max-width: 800px) { div{ font-size: 12px; }}
+    @media only screen and (max-width: 700px) { div{ font-size: 11px; }}
+    @media only screen and (max-width: 600px) { div{ font-size: 10px; }}
+    @media only screen and (max-width: 500px) { div{ font-size: 9px; }}
+    @media only screen and (max-width: 400px) { div{ font-size: 8px; }}
+    @media only screen and (max-width: 300px) { div{ font-size: 7px; }}
+
+    .key{color: #666666;}
+</style>
+<body>
+<div ng-controller="gxbReportController" style="text-align: left; margin: 30px auto; width: 1000px;" class="wrapper-xs">
+    <div class="panel panel-default">
+    <div style="background-color: #19a4f3; border: 1px solid #ddd">
+            <div style="margin: 1%5%">
+            <table style="width: 100%; font-family: microsoft yahei;"><tbody>
+            <tr><td class="h1" style="=text-align: left; color: white;" colspan="2">先锋自动化信审决策报告</td></tr>
+            <tr>
+                <td style="width: 60%; text-align: left; height: 110px"><table><tbody>
+                <tr><td style="text-align: left; color: white; height: 30px;">编号：<span style="color: red">{{approvalUuid}}</span></td></tr>
+                <tr><td style="text-align: left; color: white; height: 30px;">申请编号：{{applyNum}}</td></tr>
+                <tr><td style="text-align: left; color: white; height: 30px;">报告生成时间：{{reportDate}}</td></tr>
+                </tbody></table></td>
+                <td style="width: 15%; text-align: left; height: 110px; color: white; position: absolute; top: 165px">决策建议：</td>
+                <td style="width: 25%; text-align: left; height: 110px; position: absolute; top: 126px; left: 70%;"><i><img src="img/zclc.png" width="150" alt=""></i></td>
+            </tr>
+            </tbody></table>
+            </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">申请人信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">姓名：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyFromDto.idCardInfoDto.name}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">性别：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyFromDto.idCardInfoDto.sex}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">年龄：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{age}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">婚姻状况：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{(reportData.applyFromDto.mateInfoDto == null || reportData.applyFromDto.mateInfoDto.mateName == null) ? unMarried : married}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">手机号：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyFromDto.otherInfoDto.phoneNumber}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">身份证号：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyFromDto.idCardInfoDto.idCardNum}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">申请借款日期：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDate | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">融资总额：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.financeInfoDto.financeAmount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">车辆信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">品牌：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.carInfoDto.brand}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车型：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.carInfoDto.type}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆省份：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.detailedDto.realDrivingProv == '' ? reportData.applyDto.detailedDto.realDrivingCity
+                            : reportData.applyDto.detailedDto.realDrivingProv}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆城市：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.detailedDto.realDrivingCity}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆融资价：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.carInfoDto.salePrice}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆当地销售价：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.carInfoDto.secondOfficialPrice == '' ? reportData.applyDto.carInfoDto.officialPrice
+                            : reportData.applyDto.carInfoDto.secondOfficialPrice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆融资价/车辆当地销售价：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.priceRatio}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 40px;">车辆使用地：</td>
+                        <td style="text-align: left; width: 25%; height: 40px;">{{reportData.applyDto.detailedDto.realDrivingProv}}{{reportData.applyDto.detailedDto.realDrivingCity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <p><h4 style="color: #067dc1; text-align: left; font-weight:bold; font-family: microsoft yahei;">地址扫描</h4></p>
+            <table style="width: 100%; font-family: microsoft yahei; border: 1px solid #ddd; color: black;">
+                <tbody>
+                    <tr style="background-color: #f4f4f5">
+                        <td style="text-align: left; width: 15%; height: 30px;padding-left:3px">地址类别</td>
+                        <td style="text-align: left; width: 35%; height: 30px;">地址</td>
+                        <td style="text-align: left; width: 30%; height: 30px;">属地</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">是否命中淘宝收货地址</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px;">身份证地址</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px; padding-right: 5%;">{{reportData.applyFromDto.idCardInfoDto.address}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.idCardCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{reportData.isOnTargetIdAdr == 1 ? hit : noHit}}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px;">驾驶证地址</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px; padding-right: 5%;">{{reportData.applyFromDto.driveLicenceInfoDto.address}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.driveLicenceCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{reportData.isOnTargetDriveAdr == 1 ? hit : noHit}}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px;">单位所在地址</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px; padding-right: 5%;">{{reportData.applyDto.workInfoDto.workUnitProv}}{{reportData.applyDto.workInfoDto.workUnitAddressProvCity}}{{reportData.applyDto.workInfoDto.workUnitAddress}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.applyDto.workInfoDto.workUnitProv}}{{reportData.applyDto.workInfoDto.workUnitAddressProvCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{reportData.isOnTargetWorkAdr == 1 ? hit : noHit}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <p><h4 style="color: #067dc1; text-align: left; font-weight:bold; font-family: microsoft yahei;">手机号扫描</h4></p>
+            <table style="width: 100%; font-family: microsoft yahei; border: 1px solid #ddd; color: black;">
+                <tbody>
+                    <tr style="background-color: #f4f4f5">
+                        <td style="text-align: left; width: 15%; height: 30px;padding-left:3px">电话类别</td>
+                        <td style="text-align: left; width: 35%; height: 30px;">电话</td>
+                        <td style="text-align: left; width: 30%; height: 30px;">属地</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">是否命中淘宝收件人电话</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px">主贷人 主手机</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px;">{{reportData.applyFromDto.otherInfoDto.phoneNumber}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.phoneNumberCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{(taobaotelString.indexOf(reportData.applyFromDto.otherInfoDto.phoneNumber) > -1) ? hit : noHit}}</td>
+                    </tr>
+                    <tr ng-show="reportData.applyFromDto.otherInfoDto.vicePhoneNumber != null && reportData.applyFromDto.otherInfoDto.vicePhoneNumber != ''" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px">主贷人 副手机</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px;">{{reportData.applyFromDto.otherInfoDto.vicePhoneNumber}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.vicePhoneNumberCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{(taobaotelString.indexOf(reportData.applyFromDto.otherInfoDto.vicePhoneNumber) > -1) ? hit : noHit}}</td>
+                    </tr>
+                    <tr ng-show="reportData.applyFromDto.mateInfoDto != null && reportData.applyFromDto.mateInfoDto.mateName != null" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px">配偶</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px;">{{reportData.applyFromDto.mateInfoDto.mateMobile}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.mateMobileCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{(taobaotelString.indexOf(reportData.applyFromDto.mateInfoDto.mateMobile) > -1) ? hit : noHit}}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px">{{reportData.applyFromDto.contactInfoDto.contact1Relationship}}</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px;">{{reportData.applyFromDto.contactInfoDto.contact1Mobile}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.contact1MobileCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{(taobaotelString.indexOf(reportData.applyFromDto.contactInfoDto.contact1Mobile) > -1) ? hit : noHit}}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px;padding-left:3px">{{reportData.applyFromDto.contactInfoDto.contact2Relationship}}</td>
+                        <td class="key" style="text-align: left; width: 35%; height: 40px;">{{reportData.applyFromDto.contactInfoDto.contact2Mobile}}</td>
+                        <td class="key" style="text-align: left; width: 30%; height: 40px;">{{reportData.contact2MobileCity}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{(taobaotelString.indexOf(reportData.applyFromDto.contactInfoDto.contact2Mobile) > -1) ? hit : noHit}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">微信信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">昵称</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatInfo.nickName}}</td>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">头像</td>
+                        <td style="text-align: left; width: 25%; height: 30px;" rowspan="3"><i><img style="width: 90px;" src="{{reportData.wechatInfo.headImgPath}}" alt=""></i></td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">性别</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatInfo.sex === 0 ? unknown : (reportData.wechatInfo.sex === 1 ? man : woman)}}<span ng-show="(reportData.wechatInfo.sex === 0 ? '未知' : (reportData.wechatInfo.sex === 1 ? '男' : '女')) == reportData.applyFromDto.idCardInfoDto.sex">（和主贷一致）</span></td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">签名</td>
+                        <td style="text-align: left; width: 25%; height: 30px;" colspan="2">{{reportData.wechatInfo.signature}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">联系人</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatContactNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="wechatContactClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isWechatContactShow">
+                        <td style="width: 100%;" colspan="4">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">昵称</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">头像</h4></td>
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">备注名</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">性别</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: center; font-weight:bold;">账号类型</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: center; font-weight:bold;">星级好友</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">省</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">市</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: center; font-weight:bold;">亲密度</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in wechatContactList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 15%; text-align: left;padding-left:3px;">{{data.contactNickName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;"><i><img style="height: 50px; width: 50px;" src="{{data.contactHeadImgPath}}" alt=""></i></td>
+                                    <td style="width: 15%; text-align: left;padding-left:3px;">{{data.contactRemarkName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.contactSex === 0 ? unknown : (data.contactSex === 1 ? man : woman)}}</td>
+                                    <td style="width: 10%; text-align: center;padding-left:3px;">{{data.contactVerifyFlag === 0 ? typePersonal : typePublic}}</td>
+                                    <td style="width: 10%; text-align: center;padding-left:3px;">{{data.contactStarFriend === 1 ? yes : no}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.contactProvince}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.contactCity}}</td>
+                                    <td style="width: 10%; text-align: center;padding-left:3px;">{{data.contactIntimacy}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">群</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatContactGroupNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="wechatContactGroupClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isWechatContactGroupShow">
+                        <td style="width: 100%;" colspan="4">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 20%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">昵称</h4></td>
+                                    <td style="width: 20%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">头像</h4></td>
+                                    <td style="width: 15%;padding-left:3px"><h4 style="color: black; text-align: center; font-weight:bold;">是否群主</h4></td>
+                                    <td style="width: 15%;padding-left:3px"><h4 style="color: black; text-align: center; font-weight:bold;">群组人数</h4></td>
+                                    <td style="width: 15%;padding-left:3px"><h4 style="color: black; text-align: center; font-weight:bold;">是否收藏了群</h4></td>
+                                    <td style="width: 15%;padding-left:3px"><h4 style="color: black; text-align: center; font-weight:bold;">亲密度</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in wechatContactGroupList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 20%; text-align: left;padding-left:3px">{{data.groupNickName}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px"><i><img style="height: 50px; width: 50px;" src="{{data.groupHeadImgPath}}" alt=""></i></td>
+                                    <td style="width: 15%; text-align: center;padding-left:3px">{{data.isOwner === 1 ? yes : no}}</td>
+                                    <td style="width: 15%; text-align: center;padding-left:3px">{{data.memberCount}}</td>
+                                    <td style="width: 15%; text-align: center;padding-left:3px">{{data.isCollection === 1 ? yes : no}}</td>
+                                    <td style="width: 15%; text-align: center;padding-left:3px">{{data.contactIntimacy}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">共享联系人</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatShareContactNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="wechatShareContactClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isWechatShareContactShow">
+                        <td style="width: 100%;" colspan="4">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">申请编号</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">主贷人名称</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">主贷人电话</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">共享联系人昵称</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">共享联系人性别</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">共享联系人签名</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">共享联系人所在省</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">共享联系人所在市</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in wechatShareContactList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].applyNum}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].name}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].tel}}</td>
+                                    <td style="width: 70%;" colspan="5">
+                                        <table style="width: 100%;border-left: 1px solid #ddd;table-layout: fixed;">
+                                            <tbody>
+                                            <tr ng-repeat="itemData in data" style="{{($index) > 0 ? 'border-top: 1.5px solid #ddd' : 'border-top: 0px solid white' }}">
+                                                <td style="width: 28%; text-align: left;padding-left:3px;">{{itemData.nickName}}</td>
+                                                <td style="width: 14%; text-align: left;padding-left:3px;">{{itemData.sex === 0 ? unknown : (itemData.sex === 1 ? man : woman)}}</td>
+                                                <td style="width: 28%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{itemData.signature}}">{{itemData.signature}}</td>
+                                                <td style="width: 14%; text-align: left;padding-left:3px;">{{itemData.province}}</td>
+                                                <td style="width: 14%; text-align: left;padding-left:3px;">{{itemData.city}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">共享群组</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.wechatShareContactGroupNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="wechatShareContactGroupClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isWechatShareContactGroupShow">
+                        <td style="width: 100%;" colspan="4">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 20%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">申请编号</h4></td>
+                                    <td style="width: 25%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">主贷人名称</h4></td>
+                                    <td style="width: 20%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">主贷人电话</h4></td>
+                                    <td style="width: 35%;padding-left:3px"><h4 style="color: black; text-align: left; font-weight:bold;">共享群组昵称</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in wechatShareContacGrouptList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 20%; text-align: left;padding-left:3px">{{data[0].applyNum}}</td>
+                                    <td style="width: 25%; text-align: left;padding-left:3px">{{data[0].name}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px">{{data[0].tel}}</td>
+                                    <td style="width: 35%;padding-left:3px" colspan="1">
+                                        <table style="width: 100%;border-left: 1.5px solid #ddd;">
+                                            <tbody>
+                                            <tr ng-repeat="itemData in data" style="{{($index) > 0 ? 'border-top: 1.5px solid #ddd' : 'border-top: 0px solid white' }}">
+                                                <td style="width: 100%; text-align: left;padding-left:3px">{{itemData.nickName}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">淘宝基本信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">姓名</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.taobaoInfo.name}}{{taobaoNameSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">手机号码</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.taobaoInfo.mobile}}{{taobaoTelSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">身份证</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.taobaoInfo.identityCard}}{{taobaoIdCardSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">淘宝账号</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.taobaoInfo.taobaoAccount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 25%; height: 30px;">作为买家信用额度</td>
+                        <td style="text-align: left; width: 25%; height: 30px;">{{reportData.taobaoInfo.creditLevelAsBuyer}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">淘宝交易信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">交易总笔数</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.taobaoInfo.wholeCount}}<span style="color: #1797be; padding-left: 20px;" ng-click="taobaoTradeClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isTaobaoTradeShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 10%"><h4 style="color: black; text-align: left; font-weight:bold;">订单号</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">创建时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">订单完成时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">支付时间</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">实付金额</h4></td>
+                                    <td style="width: 30%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">商品名称</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: center; font-weight:bold;">购买数量</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">原价</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">实际金额</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in taobaoTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 10%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data[0].orderNumber}}">{{data[0].orderNumber}}</td>
+                                    <td style="width: 5%; text-align: left;padding-left:3px;">{{data[0].tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].orderCreateTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].endTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].payTime}}</td>
+                                    <td style="width: 5%; text-align: right;padding-right:3px; border-right: 1.5px solid #ddd">{{data[0].actualFee}}</td>
+                                    <td style="width: 50%;" colspan="4">
+                                        <table style="width: 100%;table-layout: fixed;">
+                                            <tbody>
+                                            <tr ng-repeat="itemData in data" style="{{($index) > 0 ? 'border-top: 1.5px solid #ddd' : 'border-top: 0px solid white' }}">
+                                                <td style="width: 60%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{itemData.itemTitle}}">{{itemData.itemTitle}}</td>
+                                                <td style="width: 10%; text-align: right;padding-right:3px;">{{itemData.quantity}}</td>
+                                                <td style="width: 10%; text-align: right;padding-right:3px;">{{itemData.original}}</td>
+                                                <td style="width: 20%; text-align: right;padding-right:3px;">{{itemData.actual}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">交易总金额</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.taobaoInfo.wholeFee}}<span style="color: #1797be; padding-left: 20px;" ng-click="taobaoTradeAmountClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isTaobaoTradeAmountShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 10%"><h4 style="color: black; text-align: left; font-weight:bold;">订单号</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">创建时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">订单完成时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">支付时间</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">实付金额</h4></td>
+                                    <td style="width: 30%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">商品名称</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: center; font-weight:bold;">购买数量</h4></td>
+                                    <td style="width: 5%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">原价</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">实际金额</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in taobaoTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 10%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data[0].orderNumber}}">{{data[0].orderNumber}}</td>
+                                    <td style="width: 5%; text-align: left;padding-left:3px;">{{data[0].tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].orderCreateTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].endTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data[0].payTime}}</td>
+                                    <td style="width: 5%; text-align: right;padding-right:3px; border-right: 1.5px solid #ddd">{{data[0].actualFee}}</td>
+                                    <td style="width: 50%;" colspan="4">
+                                        <table style="width: 100%;table-layout: fixed;">
+                                            <tbody>
+                                            <tr ng-repeat="itemData in data" style="{{($index) > 0 ? 'border-top: 1.5px solid #ddd' : 'border-top: 0px solid white' }}">
+                                                <td style="width: 60%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{itemData.itemTitle}}">{{itemData.itemTitle}}</td>
+                                                <td style="width: 10%; text-align: right;padding-right:3px;">{{itemData.quantity}}</td>
+                                                <td style="width: 10%; text-align: right;padding-right:3px;">{{itemData.original}}</td>
+                                                <td style="width: 20%; text-align: right;padding-right:3px;">{{itemData.actual}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <p><h4 style="color: #067dc1; text-align: left; font-weight:bold; font-family: microsoft yahei;">淘宝收货地址</h4></p>
+            <table style="width: 100%; font-family: microsoft yahei; border: 1px solid #ddd; color: black;">
+                <tbody>
+                    <tr style="background-color: #f4f4f5">
+                        <td style="text-align: left; width: 15%; height: 30px;padding-left:3px">收货人</td>
+                        <td style="text-align: left; width: 18%; height: 30px;">电话</td>
+                        <td style="text-align: left; width: 45%; height: 30px;">地址</td>
+                        <td style="text-align: left; width: 22%; height: 30px;">收货地址所在区域</td>
+                    </tr>
+                    <tr ng-repeat="data in reportData.taobaoConsigneeAddressesDtoList" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 15%; height: 40px; padding-left:3px">{{data.receiveName}}{{((data.receiveName == reportData.applyFromDto.idCardInfoDto.name) &&(applicantTel.indexOf(data.telNumber)> -1) &&(data.flag == 1)) ? hitWithBrackets : emptyString}}</td>
+                        <td class="key" style="text-align: left; width: 18%; height: 40px;">{{data.telNumber}}{{((data.receiveName == reportData.applyFromDto.idCardInfoDto.name) &&(applicantTel.indexOf(data.telNumber)> -1) &&(data.flag == 1)) ? hitWithBrackets : emptyString}}</td>
+                        <td class="key" style="text-align: left; width: 45%; height: 40px; padding-right: 5%;">{{data.address}}{{((data.receiveName == reportData.applyFromDto.idCardInfoDto.name) &&(applicantTel.indexOf(data.telNumber)> -1) &&(data.flag == 1)) ? hitWithBrackets : emptyString}}</td>
+                        <td class="key" style="text-align: left; width: 22%; height: 40px; padding-left:3px;">{{data.region}}</td>
+                    </tr>
+                    <tr ng-show="reportData.taobaoConsigneeAddressesDtoList == null || reportData.taobaoConsigneeAddressesDtoList == ''">
+                        <td class="key" style="text-align: center; width: 20%; height: 40px;" colspan="4">暂无淘宝收货地址</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">支付宝基本信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">姓名</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.name}}{{alipayNameSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">手机号码</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.mobile}}{{alipayTelSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">身份证</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.identityCard}}{{alipayIdCardSame}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">支付宝账号</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.alipayAccount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">余额宝余额</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.yuebaoBalance}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">是否实名认证</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.isVerified ? yes : no}}</td>
+                    </tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">支付宝注册时间</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayInfo.alipayRegistrationDatetime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <table style="width: 100%; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr><td style="text-align: left;"><h4 style="color: #067dc1; font-weight:bold; font-family: microsoft yahei;">支付宝交易信息</h4></td></tr>
+                    <tr>
+                        <td class="key" style="text-align: left; width: 50%; height: 30px;">支出总笔数</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayPayTradeNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="alipayPayTradeClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isAlipayPayTradeShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;table-layout: fixed;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 18%"><h4 style="color: black; text-align: left; font-weight:bold;">交易号</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">购物标题</h4></td>
+                                    <td style="width: 7%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">金额</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易类型</h4></td>
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易对方</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in alipayTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 18%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.tradeNo}}">{{data.tradeNo}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.title}}">{{data.title}}</td>
+                                    <td style="width: 7%; text-align: left;padding-left:3px;">{{data.amount}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;">{{data.tradeTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.txTypeName}}</td>
+                                    <td style="width: 15%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.otherSide}}">{{data.otherSide}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="class="key" text-align: left; width: 50%; height: 30px;">支出总金额</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayPayTradeAmountNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="alipayPayTradeAmountClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isAlipayPayTradeAmountShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;table-layout: fixed;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 18%"><h4 style="color: black; text-align: left; font-weight:bold;">交易号</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">购物标题</h4></td>
+                                    <td style="width: 7%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">金额</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易类型</h4></td>
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易对方</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in alipayTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 18%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.tradeNo}}">{{data.tradeNo}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.title}}">{{data.title}}</td>
+                                    <td style="width: 7%; text-align: left;padding-left:3px;">{{data.amount}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;">{{data.tradeTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.txTypeName}}</td>
+                                    <td style="width: 15%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.otherSide}}">{{data.otherSide}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="class="key" text-align: left; width: 50%; height: 30px;">收入总笔数</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayIncomeTradeNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="alipayIncomeTradeClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isAlipayIncomeTradeShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;table-layout: fixed;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 18%"><h4 style="color: black; text-align: left; font-weight:bold;">交易号</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">购物标题</h4></td>
+                                    <td style="width: 7%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">金额</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易类型</h4></td>
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易对方</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in alipayIncomeTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 18%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.tradeNo}}">{{data.tradeNo}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.title}}">{{data.title}}</td>
+                                    <td style="width: 7%; text-align: left;padding-left:3px;">{{data.amount}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;">{{data.tradeTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.txTypeName}}</td>
+                                    <td style="width: 15%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.otherSide}}">{{data.otherSide}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="class="key" text-align: left; width: 50%; height: 30px;">收入总金额</td>
+                        <td style="text-align: left; width: 50%; height: 30px;">{{reportData.alipayIncomeTradeAmountNum}}<span style="color: #1797be; padding-left: 20px;" ng-click="alipayIncomeTradeAmountClick()">详情</span></td>
+                    </tr>
+                    <tr ng-show="isAlipayIncomeTradeAmountShow">
+                        <td style="width: 100%;" colspan="2">
+                            <table style="width: 100%; border: 1px solid #ddd;table-layout: fixed;">
+                                <tbody>
+                                <tr style="background-color: #f4f4f5">
+                                    <td style="width: 18%"><h4 style="color: black; text-align: left; font-weight:bold;">交易号</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">购物标题</h4></td>
+                                    <td style="width: 7%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">金额</h4></td>
+                                    <td style="width: 20%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易时间</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易状态</h4></td>
+                                    <td style="width: 10%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易类型</h4></td>
+                                    <td style="width: 15%;padding-left:3px;"><h4 style="color: black; text-align: left; font-weight:bold;">交易对方</h4></td>
+                                </tr>
+                                <tr ng-repeat="data in alipayIncomeTradeList" style="border-top: 1.5px solid #ddd">
+                                    <td style="width: 18%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.tradeNo}}">{{data.tradeNo}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.title}}">{{data.title}}</td>
+                                    <td style="width: 7%; text-align: left;padding-left:3px;">{{data.amount}}</td>
+                                    <td style="width: 20%; text-align: left;padding-left:3px;">{{data.tradeTime}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.tradeStatusName}}</td>
+                                    <td style="width: 10%; text-align: left;padding-left:3px;">{{data.txTypeName}}</td>
+                                    <td style="width: 15%; text-align: left;padding-left:3px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{{data.otherSide}}">{{data.otherSide}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <p><h4 style="color: #067dc1; text-align: left; font-weight:bold; font-family: microsoft yahei;">支付宝银行卡信息</h4></p>
+            <table style="width: 100%; font-family: microsoft yahei; border: 1px solid #ddd; color: black;">
+                <tbody>
+                    <tr style="background-color: #f4f4f5">
+                        <td style="text-align: left; width: 20%; height: 30px;padding-left:3px">银行名称</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">卡号后四位</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">卡类型</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">持卡人姓名</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">是否开通快捷</td>
+                    </tr>
+                    <tr ng-repeat="data in reportData.alipayBindedBankCardsList" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;padding-left:3px">{{data.bankName}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.cardNo}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.cardType == 1 ? debitCard : creditCard}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.cardOwnerName}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.isExpress ? yes : no}}</td>
+                    </tr>
+                    <tr ng-show="reportData.alipayBindedBankCardsList == null || reportData.alipayBindedBankCardsList == ''" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: center; width: 20%; height: 40px;" colspan="5">暂无支付宝银行卡信息</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd">
+        <div style="margin:1%5%;">
+            <p><h4 style="color: #067dc1; text-align: left; font-weight:bold; font-family: microsoft yahei;">支付宝缴费信息</h4></p>
+            <table style="width: 100%; border: 1px solid #ddd; font-family: microsoft yahei; color: black;">
+                <tbody>
+                    <tr style="background-color: #f4f4f5">
+                        <td style="text-align: left; width: 20%; height: 30px;padding-left:3px"><label>缴费项目</label></td>
+                        <td style="text-align: left; width: 20%; height: 30px;">地区</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">收款单位</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">户名</td>
+                        <td style="text-align: left; width: 20%; height: 30px;">缴费号</td>
+                    </tr>
+                    <tr ng-repeat="data in reportData.alipayPaymentAccountsList" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;padding-left:3px">{{data.category}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.city}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.organization}}</td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.accountName}}></td>
+                        <td class="key" style="text-align: left; width: 20%; height: 40px;">{{data.accountCode}}</td>
+                    </tr>
+                    <tr ng-show="reportData.alipayPaymentAccountsList == null || reportData.alipayPaymentAccountsList == ''" style="border-top: 1px solid #ddd">
+                        <td class="key" style="text-align: center; width: 20%; height: 40px;" colspan="5">暂无支付宝缴费信息</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

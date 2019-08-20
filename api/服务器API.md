@@ -15,8 +15,9 @@
 
 字段       |字段类型       |字段说明
 ------------|-----------|-----------
-username       |string        |用户名-手机号
-password       |string        |密码（md5加密）
+phone       |string        |用户名-手机号
+password       |string        |密码
+serialNumber       |string        |盒子序列号
 
 ### 请求demo
     http://localhost:8090/api/tv/home/v2.0/login.json?phone=15000932523&password=z123456&serialNumber=F202180B0E14
@@ -25,24 +26,48 @@ password       |string        |密码（md5加密）
 字段       |字段类型       |字段说明
 ------------|-----------|-----------
 token       |string        |token值
+gid       |string        |用户id
+schoolId       |int        |学校id
+name       |string        |姓名
+version       |int        |登录版本号
+phone       |string        |手机号
+
 
 ### 返回结果
 ```json  
 {
-  "data": {
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
-  },
-  "code": "0",
-  "msg": "SUCCESS"
+    "body": {
+        "gid": "1106504",
+        "phone": "15000932523",
+        "schoolId": 3315,
+        "name": "428测试",
+        "version": 91,
+        "token": "102fc8d7e52d48b784c3aaee9ef396cb"
+    },
+    "footer": {
+        "status": "200"
+    }
 }
 ``` 
+
 
 ### 错误状态码
 状态码       |说明
 ------------|-----------
-3001       |其他认证错误信息！
-3002       |用户不存在！
-3003       |用户名或密码有误！
+600       |message
+
+
+```json  
+{
+    "body": {},
+    "footer": {
+        "message": "用户密码错误，请确认密码是否输入正确，比如大小写！\r",
+        "status": "600"
+    }
+}
+``` 
+
+
 
 
 

@@ -70,7 +70,7 @@ phone       |string        |手机号
 ``` 
 
 
-## 1. 退出登录
+## 2. 退出登录
 
 ### 功能描述
 
@@ -127,3 +127,118 @@ status       |string        |状态码
     }
 }
 ``` 
+
+
+## 3. 修改密码
+
+### 功能描述
+
+- 提供用户id，老密码，新密码修改用户密码
+
+### 请求说明
+
+> 请求方式：POST<br>
+
+- 请求URL: `http://domain/api/tv/home/v2.0/updatePassword.tvbox`
+
+### 请求参数
+- 入参位置: `Request Parameter`
+
+字段       |字段类型       |字段说明
+------------|-----------|-----------
+gid       |string        |用户id
+password       |string        |新密码
+oldPassword       |string        |老密码
+
+### 请求demo
+
+    http://localhost:8090/api/tv/home/v2.0/updatePassword.tvbox?gid=1106504&password=z123456&oldPassword=z12345678
+
+### 返回参数
+字段       |字段类型       |字段说明
+------------|-----------|-----------
+status       |string        |状态码
+memberId       |string        |用户id
+
+### 返回结果
+```json  
+{
+    "body": {
+        "memberId": "1106504"
+    },
+    "footer": {
+        "status": "200"
+    }
+}
+``` 
+
+### 错误状态码
+状态码       |说明
+------------|-----------
+600         |message
+
+
+```json  
+{
+    "body": {},
+    "footer": {
+        "message": "用户密码错误，请确认密码是否输入正确，比如大小写！\r",
+        "status": "600"
+    }
+}
+``` 
+
+
+## 3. 获取首页轮播消息
+
+### 功能描述
+
+- 获取盒子首页顶部banner消息
+
+### 请求说明
+
+> 请求方式：GET<br>
+
+- 请求URL: `http://domain/api/tv/home/v2.0/queryHomeMessage.tvbox`
+
+### 请求参数
+
+
+### 请求demo
+
+    http://localhost:8090/api/tv/home/v2.0/queryHomeMessage.tvbox
+
+### 返回参数
+字段       |字段类型       |字段说明
+------------|-----------|-----------
+status       |string        |状态码
+message       |string        |轮播消息
+
+### 返回结果
+```json  
+{
+    "body": {
+        "message": "让一亿孩子有质变，让教育回归教育。"
+    },
+    "footer": {
+        "status": "200"
+    }
+}
+``` 
+
+### 错误状态码
+状态码       |说明
+------------|-----------
+600         |message
+
+
+```json  
+{
+    "body": {},
+    "footer": {
+        "message": "...",
+        "status": "600"
+    }
+}
+``` 
+

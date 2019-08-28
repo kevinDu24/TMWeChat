@@ -3,7 +3,6 @@ package com.tm.wechat.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tm.wechat.dto.baidu.ShortUrlDto;
 import com.tm.wechat.dto.baidu.ShortUrlResultDto;
-import com.tm.wechat.service.sign.ApplyContractService;
 import com.tm.wechat.utils.commons.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,7 @@ public class BaiduShortUrlService {
     @Autowired
     ObjectMapper objectMapper;
 
-    private static final Logger logger = LoggerFactory.getLogger(ApplyContractService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaiduShortUrlService.class);
 
     public String getShortUrl(String url){
         ShortUrlDto shortUrlDto = new ShortUrlDto();

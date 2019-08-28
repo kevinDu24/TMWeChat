@@ -245,18 +245,6 @@ public class ApprovalController {
         return approvalService.addContactInfo(addContactInfo, uniqueMark, user.getName());
     }
 
-    /**
-     * 新增预审批附件
-     * @param uniqueMark
-     * @param approvalAttachmentDto
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/addApprovalAttachment", method = RequestMethod.POST)
-    public ResponseEntity<Message> addApprovalAttachment(@RequestParam(value = "uniqueMark", required = true) String uniqueMark,
-                                                  @RequestBody ApprovalAttachmentAndIdCardImgDto approvalAttachmentAndIdCardImgDto, Principal user){
-        return approvalService.addApprovalAttachment(approvalAttachmentAndIdCardImgDto, uniqueMark, user.getName());
-    }
 
 
     /**
@@ -387,16 +375,6 @@ public class ApprovalController {
     }
 
 
-    /**
-     * 查询预审批附件
-     * @param uniqueMark
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/getApprovalAttachment", method = RequestMethod.GET)
-    public ResponseEntity<Message> getApprovalAttachment(@RequestParam(value = "uniqueMark", required = true) String uniqueMark, Principal user){
-        return approvalService.getApprovalAttachment(uniqueMark, user.getName());
-    }
 
     /**
      * 根据唯一标识查询身份证信息

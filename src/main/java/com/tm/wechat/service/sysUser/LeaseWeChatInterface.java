@@ -1,6 +1,5 @@
 package com.tm.wechat.service.sysUser;
 
-import com.tm.wechat.domain.WzApplyInfo;
 import com.tm.wechat.dto.approval.AppUserBasicInfoDto;
 import com.tm.wechat.dto.message.Message;
 import com.tm.wechat.dto.sysUser.PushOrderDto;
@@ -9,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**

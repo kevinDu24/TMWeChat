@@ -24,9 +24,9 @@ spring:
 #    url: jdbc:postgresql://localhost:5432/jisuanqi
 #    username: postgres
 #    password: postgres
-    url: jdbc:postgresql://127.0.0.1:5432/xftm_tmwechat
+    url: jdbc:postgresql://127.0.0.1:5432/tmwechat
     username: postgres
-    password: db_admin
+    password: postgres
     driver-class-name: org.postgresql.Driver
 #spring:
 #  jpa:
@@ -53,33 +53,33 @@ file:
   filePath: /var/www/html/device/
   newsPath: /var/www/html/news/
   creditImgPath: /var/www/html/creditImg/
-  requestFrontPath: http://10.10.11.210:6080/device/
-  requestCreditImgPath: http://10.10.11.210:6080/creditImg/
+  requestFrontPath: http://dys.mynatapp.cc/device/
+  requestCreditImgPath: http://dys.mynatapp.cc/creditImg/
   feedbackSoundPath: /var/www/html/feedbackSound/
-  requestfeedbackSoundPath: http://10.10.11.210:6080/feedbackSound/
+  requestfeedbackSoundPath: http://dys.mynatapp.cc/feedbackSound/
   headImgPath: /var/www/html/headImg/
-  requestHeadImgPath: http://10.10.11.210:6080/headImg/
+  requestHeadImgPath: http://dys.mynatapp.cc/headImg/
   deviceImgPath: /var/www/device/
   annexesImgPath: /var/www/html/annexesImg/
-  requestAnnexesImgPath: http://10.10.11.210:6080/annexesImg/
+  requestAnnexesImgPath: http://dys.mynatapp.cc/annexesImg/
   cmdImgPath:  /var/www/html/cmdImg/
-  requestCmdImgPath: http://10.10.11.210:6080/files/download/
+  requestCmdImgPath: http://dys.mynatapp.cc/files/download/
   cmdOtherImgPath:  /var/www/html/cmdOtherImg/
-  requestCmdOtherImgPath: http://10.10.11.210:6080/files/download/
+  requestCmdOtherImgPath: http://dys.mynatapp.cc/files/download/
   approvalIdCardPath: /var/www/html/approvalIdCard/
-  requestApprovalIdCardPath: http://10.10.11.210:6080/files/download/idCard/
+  requestApprovalIdCardPath: http://dys.mynatapp.cc/files/download/idCard/
   approvalDrivePath: /var/www/html/approvalDrive/
-  requestApprovalDrivePath: http://10.10.11.210:6080/files/download/drivingLicence/
+  requestApprovalDrivePath: http://dys.mynatapp.cc/files/download/drivingLicence/
   approvalBankPath: /var/www/html/approvalBank/
-  requestApprovalBankPath: http://10.10.11.210:6080/files/download/bankCard/
+  requestApprovalBankPath: http://dys.mynatapp.cc/files/download/bankCard/
   approvalVerdictPath: /var/www/html/approvalVerdict/
-  requestApprovalVerdictPath: http://10.10.11.210:6080/approvalVerdict/
+  requestApprovalVerdictPath: http://dys.mynatapp.cc/approvalVerdict/
   applyUsedCarEvaluationPath: /var/www/html/usedCarEvaluation/
   requestApplyUsedCarEvaluationPath: http://dys.tunnel.qydev.com/files/download/
   letterOfCreditPath: /var/www/html/letterOfCredit/
-  requestLetterOfCreditPath: http://10.10.11.210:6080/files/download/letterOfCredit/
+  requestLetterOfCreditPath: http://dys.mynatapp.cc/files/download/letterOfCredit/
   handHoldLetterOfCreditPath: /var/www/html/handHoldLetterOfCredit/
-  requestHandHoldLetterOfCreditPath: http://10.10.11.210:6080/files/download/handHoldLetterOfCredit/
+  requestHandHoldLetterOfCreditPath: http://dys.mynatapp.cc/files/download/handHoldLetterOfCredit/
   applyFormPath: /var/www/html/applyForm/
   jointFilePath: /var/www/html/jointFile/
   mateFilePath: /var/www/html/mateFile/
@@ -87,17 +87,17 @@ file:
   requestPaymentFilePath: /var/www/html/requestPaymentFile/
   insurancePolicyPath: /var/www/html/insurancePolicyFile/
   onlineCommunicationPath: /var/www/html/onlineCommunication/
-  requestFilePath: http://10.10.11.210:6080/files/download/
+  requestFilePath: http://dys.mynatapp.cc/files/download/
   idCardPath: /var/www/html/idCard/
   requestIdCardPath: http:// /files/download/idCard/
   faceImagePath: /var/www/html/faceImage/
-  requestFaceImagePath: http://10.10.11.210:6080/files/download/faceImage/
+  requestFaceImagePath: http://dys.mynatapp.cc/files/download/faceImage/
   pdfPath: /var/www/html/pdf/
-  requestPdfPath: http://10.10.11.210:6080/files/download/pdf/
+  requestPdfPath: http://dys.mynatapp.cc/files/download/pdf/
   signedPdfPath: /var/www/html/signedPdf/
-  requestSignedPdfPath: http://10.10.11.210:6080/files/download/signedPdf/
+  requestSignedPdfPath: http://dys.mynatapp.cc/files/download/signedPdf/
   userPhotoPath: /var/www/html/userPhoto/
-  requestUserPhotoPath: http://10.10.11.210:6080/files/download/userPhoto/
+  requestUserPhotoPath: http://dys.mynatapp.cc/files/download/userPhoto/
 
 admin:
   auth: Basic d2VjaGF0OmxlYWR1MjAxNg==

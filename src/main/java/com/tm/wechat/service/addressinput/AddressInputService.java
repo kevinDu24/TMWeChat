@@ -11,7 +11,6 @@ import com.tm.wechat.dto.sign.AddressInputInfoDto;
 import com.tm.wechat.dto.sms.SendShortMessageDto;
 import com.tm.wechat.service.applyOnline.CoreSystemInterface;
 import com.tm.wechat.service.applyOnline.XftmSystemInterface;
-import com.tm.wechat.service.sign.ApplyContractService;
 import com.tm.wechat.service.xftm.XftmAppInterFace;
 import com.tm.wechat.utils.commons.CommonUtils;
 import net.sf.json.JSONArray;
@@ -44,7 +43,7 @@ public class AddressInputService {
     @Autowired
     private XftmAppInterFace xftmAppInterFace;
 
-    private static final Logger logger = LoggerFactory.getLogger(ApplyContractService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddressInputService.class);
 
     /**
      * 用户地址录入获取信息
